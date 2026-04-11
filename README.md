@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![CARLA Simulator](https://img.shields.io/badge/CARLA-0.9.13-orange)](https://carla.readthedocs.io/)
+[![CARLA Simulator](https://img.shields.io/badge/CARLA-0.9.15-orange)](https://carla.readthedocs.io/)
 
 **Official implementation of the centralized MARL baseline presented at AIR 2026.**
 
