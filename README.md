@@ -24,9 +24,33 @@ While the core server-client rendering logic remains inspired by `gym-carla`, th
 ## 🛠️ Installation
 
 **1. Install the CARLA Simulator**
-Download and install [CARLA](https://github.com/carla-simulator/carla/releases) (Recommended: v0.9.13). Ensure the CARLA server is running before executing any training scripts.
+Download and install [CARLA](https://github.com/carla-simulator/carla/releases) (Recommended: v0.9.15). Ensure the CARLA server is running before executing any training scripts.
 
 **2. Clone this repository**
 ```bash
-git clone [https://github.com/AmineSen0AT0/MARL-Platooning-CARLA.git](https://github.com/AmineSen0AT0/MARL-Platooning-CARLA.git)
+git clone https://github.com/AmineSen0AT0/MARL-Platooning-CARLA.git
 cd MARL-Platooning-CARLA
+```
+**3. Set up the Conda Environment**
+```bash
+conda create -n carla_marl python=3.10
+conda activate carla_marl
+```
+**4. Install dependencies**
+```bash
+pip install -r requirements.txt
+pip install -e .
+```
+
+## 🚀 Usage
+**1. Launch the CARLA Server**
+```bash
+./CarlaUE4.sh -windowed -carla-port=2000
+```
+(Tip: You can use Alt+F1 to get your mouse control back while the window is active).
+Alternatively, for faster training without rendering, run it in non-display mode:
+
+```
+./CarlaUE4.sh -RenderOffScreen -carla-port=2000
+```
+
