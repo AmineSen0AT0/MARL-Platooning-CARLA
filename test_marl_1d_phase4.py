@@ -19,7 +19,7 @@ class CentralizedPlatoonWrapper(gym.Env):
         self.carla_env = CarlaEnv(params)
 
         print("🧠 Wrapper loading the Frozen Horse Brain for steering...")
-        self.horse_model = PPO.load("./ppo_checkpoints_finetuned/baseline_perfect_smooth_model.zip", device="cuda")
+        self.horse_model = PPO.load("./Models/baseline_perfect_smooth_model.zip", device="cuda")
 
         self.action_space = spaces.Box(low=-3.0, high=3.0, shape=(5,), dtype=np.float32)
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(25,), dtype=np.float32)
@@ -111,7 +111,7 @@ def main():
     env = CentralizedPlatoonWrapper(params)
 
     # 🛑 UPDATE THIS EXACT FILENAME IF NEEDED 🛑
-    model_path = "./marl_v2v_fixed_collision_models_50k_penality_collision/marl_v2v_fixed_collision_50k_penality_collision_900032_steps.zip"
+    model_path = "./Models/marl_v2v_1M_steps.zip"
 
     print(f"🧠 Loading the 2M Step MARL Brain from: {model_path}")
     model = PPO.load(model_path, device="cuda")
