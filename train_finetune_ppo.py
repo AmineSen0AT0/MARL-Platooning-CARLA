@@ -55,7 +55,7 @@ def main():
     print("Loading Golden Brain for Fine-Tuning...")
     # LOAD YOUR 780k CHECKPOINT HERE
     model = PPO.load(
-        "./ppo_checkpoints/ppo_carla_780000_steps.zip",
+        "./Models/ppo_carla_780000_steps.zip",
         env=env,
         device="cuda",
         tensorboard_log=log_dir,
