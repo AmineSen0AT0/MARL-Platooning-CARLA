@@ -7,7 +7,7 @@ from gymnasium import spaces
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import CheckpointCallback
 
-# IMPORT YOUR NEW PHASE 4 ENVIRONMENT
+# IMPORT NEW PHASE 4 ENVIRONMENT
 from my_carla_env_gymnasium.carla_env_phase4 import CarlaEnv
 
 
@@ -22,7 +22,7 @@ class CentralizedPlatoonWrapper(gym.Env):
         self.carla_env = CarlaEnv(params)
 
         print("🧠 Wrapper loading the Frozen Horse Brain for steering...")
-        model_path = "./ppo_checkpoints_finetuned/baseline_perfect_smooth_model.zip"
+        model_path = "./Models/baseline_perfect_smooth_model.zip"
         self.horse_model = PPO.load(model_path, device="cuda")
 
         # 5 actions (Gas/Brake for Agents 1-5)
@@ -152,17 +152,17 @@ def main():
 
     env = CentralizedPlatoonWrapper(params)
 
-    models_dir = "./marl_v2v_fixed_collision_models_50k_penality_collision"
+    models_dir = "./Models"
     logdir = "./logs_marl"
     os.makedirs(models_dir, exist_ok=True)
     os.makedirs(logdir, exist_ok=True)
 
     # Save a checkpoint every 5000 steps so we don't lose data if it crashes!
     checkpoint_callback = CheckpointCallback(save_freq=5000, save_path=models_dir,
-                                             name_prefix='marl_v2v_fixed_collision_50k_penality_collision')
+                                             name_prefix='marl_v2v')
 
     # Load the 1.5M model
-    checkpoint_path = f"{models_dir}/marl_v2v_fixed_collision_50k_penality_collision_1945032_steps.zip"
+    checkpoint_path = f"{models_dir}/marl_v2v_2M_steps.zip"
 
     # Fallback just in case it was saved as a step checkpoint instead of 'final'
 
@@ -173,8 +173,8 @@ def main():
 
     print("🔥 Resuming GPU Training Loop for another 55,000 steps (Target: 2M total)...")
 
-    # reset_num_timesteps=False prevents TensorBoard from deleting your first 300k steps!
-    model.learn(total_timesteps=55000, tb_log_name="PPO_V2V_Platoon_fixed_collision_50k_penality_collision",
+    # reset_num_timesteps=False prevents TensorBoard from deleting first 300k steps!
+    model.learn(total_timesteps=55000, tb_log_name="PPO_V2V",
                 callback=checkpoint_callback, reset_num_timesteps=False)
 
     print("💾 Training Finished! Saving 2M model...")
